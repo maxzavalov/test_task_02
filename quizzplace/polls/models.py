@@ -13,3 +13,20 @@ class Poll(models.Model):
     class Meta:
         verbose_name = "Опрос"
         verbose_name_plural = "Опросы"
+
+
+class Question(models.Model):
+    """Модель вопроса."""
+
+    QUESTIONS_TYPES = [("text input", "Text input"), ("answer choice", "Answer choice")]
+
+    text = models.CharField(max_length=300, null=False, blank=True, verbose_name="Текст вопроса")
+    type = models.CharField(max_length=50, choices=QUESTIONS_TYPES, verbose_name="Тип вопроса")
+    survey = models.ForeignKey(Poll, related_name='question', on_delete=models.CASCADE, verbose_name="Опрос")
+
+    class Meta:
+        verbose_name = "Вопрос"
+        verbose_name_plural = "Вопросы"
+
+
+
