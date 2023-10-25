@@ -29,4 +29,13 @@ class Question(models.Model):
         verbose_name_plural = "Вопросы"
 
 
+class Answer(models.Model):
+    """Модель ответа."""
 
+    text = models.TextField(max_length=1500, null=False, blank=True, verbose_name="Текст ответа")
+    isCorrect = models.BooleanField(verbose_name="Является ли ответ верным")
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answer', verbose_name='Вопрос')
+
+    class Meta:
+        verbose_name = "Ответ"
+        verbose_name_plural = "Ответы"
